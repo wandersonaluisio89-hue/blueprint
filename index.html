@@ -1,1 +1,118 @@
 
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>BLUEPRINT — Encontre. Crie. Venda.</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    BLUEPRINT
+  </div>
+
+  <div class="right">
+
+    <span id="credits">
+      25 créditos
+    </span>
+
+    <button onclick="openBuilder()">
+      Criar projeto
+    </button>
+
+  </div>
+
+</header>
+
+
+<main>
+
+
+<section id="home" class="screen active">
+
+  <div class="hero">
+
+    <small>
+      BLUEPRINT · PROJECT BRAIN
+    </small>
+
+    <h1>
+      Transforme uma ideia<br>
+      <span>em um produto real.</span>
+    </h1>
+
+    <p>
+      Você não precisa saber o próximo passo.
+      O Blueprint mostra.
+    </p>
+
+    <button onclick="openBuilder()">
+      Começar a criar
+    </button>
+
+  </div>
+
+</section>
+
+
+
+<section id="builder" class="screen">
+
+  <div class="wrap">
+
+    <small>
+      BUILDER
+    </small>
+
+    <h2>
+      O que você quer criar?
+    </h2>
+
+    <p>
+      Descreva sua ideia em linguagem natural.
+    </p>
+
+
+    <textarea
+      id="idea"
+      placeholder="Ex.: Quero criar um SaaS para uma clínica com pacientes, médicos, horários, agendamento e painel administrativo."
+    ></textarea>
+
+
+    <div class="chips">
+
+      <button onclick="preset('Quero criar um sistema para uma clínica com pacientes, médicos, horários, agendamento e painel administrativo.')">
+        Clínica
+      </button>
+
+      <button onclick="preset('Quero criar um sistema para uma barbearia com clientes, barbeiros, serviços, agendamento e painel administrativo.')">
+        Barbearia
+      </button>
+
+      <button onclick="preset('Quero criar uma plataforma para academia com alunos, planos, pagamentos, treinos e painel administrativo.')">
+        Academia
+      </button>
+
+    </div>
+
+
+    <p class="cost">
+      Estimativa:
+      <b>7 créditos</b>
+    </p>
+
+
+    <button onclick="createBlueprint()">
+      Criar com o Blueprint Brain
+    </button>
+
+
+    <div class="brain
