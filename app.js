@@ -1,4 +1,5 @@
 let projects = [];
+let isCreating = false;
 
 function show(screen) {
   document.querySelectorAll(".screen").forEach((item) => {
@@ -37,7 +38,10 @@ function createBlueprint() {
   const idea = document.getElementById("idea");
   const log = document.getElementById("log");
 
-  if (!idea || !log) return;
+  if (!idea || !log) {
+    console.error("Elementos #idea ou #log não encontrados.");
+    return;
+  }
 
   const text = idea.value.trim();
 
@@ -46,22 +50,37 @@ function createBlueprint() {
     return;
   }
 
-  log.textContent = "Analisando sua ideia...\n";
+  if (isCreating) {
+    return;
+  }
+
+  isCreating = true;
+
+  const button = document.querySelector(
+    'button[onclick="createBlueprint()"]'
+  );
+
+  if (button) {
+    button.disabled = true;
+    button.textContent = "Criando...";
+  }
+
+  log.textContent = "Analisando sua ideia...";
 
   setTimeout(() => {
     log.textContent +=
-      "Identificando produto, público e funcionalidades...\n";
+      "\nIdentificando produto, público e funcionalidades...";
   }, 600);
 
   setTimeout(() => {
     log.textContent +=
-      "Estruturando o projeto com o Blueprint Brain...\n";
+      "\nEstruturando o projeto com o Blueprint Brain...";
   }, 1200);
 
   setTimeout(() => {
     const project = {
       id: Date.now(),
-      name: "Novo projeto",
+      name: text.substring(0, 40),
       idea: text,
       date: new Date().toLocaleDateString("pt-BR")
     };
@@ -72,32 +91,59 @@ function createBlueprint() {
     renderProjects();
 
     log.textContent +=
-      "\n✓ Projeto criado com sucesso.\n\n" +
+      "\n\n✓ Projeto criado com sucesso.\n\n" +
       "Próximas etapas identificadas:\n" +
       "• Definir público\n" +
       "• Estruturar funcionalidades\n" +
       "• Criar MVP\n" +
       "• Preparar lançamento";
 
+    isCreating = false;
+
+    if (button) {
+      button.disabled = false;
+      button.textContent = "Criar com o Blueprint Brain";
+    }
+
+    /*
+     * Depois de criar o projeto, abre a tela de projetos.
+     * O seu index.html precisa ter um elemento com id="projects".
+     */
+    setTimeout(() => {
+      const projectsScreen = document.getElementById("projects");
+
+      if (projectsScreen) {
+        show("projects");
+      }
+    }, 1500);
   }, 2000);
 }
 
 function saveProjects() {
-  localStorage.setItem(
-    "blueprint_projects",
-    JSON.stringify(projects)
-  );
+  try {
+    localStorage.setItem(
+      "blueprint_projects",
+      JSON.stringify(projects)
+    );
+  } catch (error) {
+    console.error("Não foi possível salvar o projeto:", error);
+  }
 }
 
 function loadProjects() {
-  const saved = localStorage.getItem("blueprint_projects");
+  try {
+    const saved = localStorage.getItem("blueprint_projects");
 
-  if (saved) {
-    try {
-      projects = JSON.parse(saved);
-    } catch (error) {
-      projects = [];
+    if (saved) {
+      const parsedProjects = JSON.parse(saved);
+
+      if (Array.isArray(parsedProjects)) {
+        projects = parsedProjects;
+      }
     }
+  } catch (error) {
+    console.error("Não foi possível carregar os projetos:", error);
+    projects = [];
   }
 
   renderProjects();
@@ -106,7 +152,9 @@ function loadProjects() {
 function renderProjects() {
   const container = document.getElementById("projectList");
 
-  if (!container) return;
+  if (!container) {
+    return;
+  }
 
   if (projects.length === 0) {
     container.innerHTML = `
@@ -131,8 +179,6 @@ function renderProjects() {
             ${escapeHTML(project.idea)}
           </p>
 
-          <br>
-
           <small>
             Criado em ${escapeHTML(project.date)}
           </small>
@@ -144,10 +190,20 @@ function renderProjects() {
 
 function escapeHTML(text) {
   const div = document.createElement("div");
-
-  div.textContent = text;
-
+  div.textContent = String(text || "");
   return div.innerHTML;
+}
+
+function clearProjects() {
+  projects = [];
+
+  try {
+    localStorage.removeItem("blueprint_projects");
+  } catch (error) {
+    console.error("Não foi possível apagar os projetos:", error);
+  }
+
+  renderProjects();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
