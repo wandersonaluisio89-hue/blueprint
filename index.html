@@ -1,205 +1,1197 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<title>BLUEPRINT — Encontre. Crie. Venda.</title>
 
-  <meta
-    name="description"
-    content="BLUEPRINT — Encontre. Crie. Venda. Transforme uma ideia em um produto real."
-  >
+<meta
+  name="description"
+  content="BLUEPRINT — Você não precisa saber o próximo passo. O Blueprint mostra."
+>
 
-  <title>BLUEPRINT — Encontre. Crie. Venda.</title>
+<style>
 
-  <link rel="stylesheet" href="styles.css">
+/* =========================================================
+   BLUEPRINT — DESIGN SYSTEM
+   ========================================================= */
+
+:root {
+  --bg: #07090d;
+  --bg2: #0b0f16;
+  --panel: #10151e;
+  --panel2: #141a24;
+
+  --border: #252e3c;
+  --border-light: #303b4d;
+
+  --text: #f5f7fb;
+  --muted: #929daf;
+  --muted2: #6f7b8d;
+
+  --accent: #9aa9ff;
+  --success: #86e1a7;
+  --warning: #f1c674;
+
+  --radius: 16px;
+}
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(
+      circle at 80% -10%,
+      rgba(91, 109, 190, .25),
+      transparent 35%
+    ),
+    var(--bg);
+
+  color: var(--text);
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  min-height: 100vh;
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn {
+  border-radius: 10px;
+  padding: 13px 18px;
+  border: 1px solid transparent;
+  font-weight: 800;
+  transition: .2s;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: #f1f4f8;
+  color: #080a0e;
+}
+
+.btn-secondary {
+  background: #131923;
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.btn-danger {
+  background: #261317;
+  color: #ff9d9d;
+  border-color: #4c252b;
+}
+
+.btn-small {
+  padding: 9px 13px;
+  font-size: 13px;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header {
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 5%;
+
+  border-bottom: 1px solid var(--border);
+
+  background: rgba(7, 9, 13, .88);
+
+  backdrop-filter: blur(20px);
+
+  position: sticky;
+  top: 0;
+
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-weight: 950;
+  letter-spacing: .18em;
+}
+
+.logo-symbol {
+  width: 32px;
+  height: 32px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid #68758d;
+
+  border-radius: 8px;
+
+  font-size: 14px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.credit-badge {
+  border: 1px solid var(--border);
+
+  padding: 9px 13px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
+  color: #d1d8e5;
+}
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+
+.container {
+  width: min(1200px, 90%);
+  margin: auto;
+}
+
+.section {
+  display: none;
+  min-height: calc(100vh - 70px);
+  padding: 70px 0 110px;
+}
+
+.section.active {
+  display: block;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+  min-height: 55vh;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+.eyebrow {
+  font-size: 11px;
+
+  letter-spacing: .2em;
+
+  color: #8490a7;
+
+  font-weight: 900;
+
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: clamp(46px, 7vw, 88px);
+
+  line-height: .96;
+
+  letter-spacing: -.055em;
+
+  max-width: 900px;
+}
+
+.hero h1 span {
+  color: var(--accent);
+}
+
+.hero p {
+  color: var(--muted);
+
+  font-size: 19px;
+
+  line-height: 1.6;
+
+  max-width: 680px;
+
+  margin-top: 25px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+
+  margin-top: 32px;
+}
+
+/* =========================================================
+   FEATURE CARDS
+   ========================================================= */
+
+.feature-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 16px;
+}
+
+.card {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18, 23, 32, .95),
+      rgba(11, 15, 22, .95)
+    );
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius);
+
+  padding: 25px;
+}
+
+.card-number {
+  color: #7886a2;
+
+  font-size: 12px;
+
+  font-weight: 900;
+}
+
+.card h3 {
+  margin-top: 20px;
+
+  font-size: 22px;
+}
+
+.card p {
+  color: var(--muted);
+
+  line-height: 1.6;
+
+  margin-top: 8px;
+}
+
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
+
+.section-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-end;
+
+  gap: 30px;
+
+  margin-bottom: 30px;
+}
+
+.section-header h2 {
+  font-size: clamp(35px, 5vw, 58px);
+
+  letter-spacing: -.045em;
+}
+
+.section-header p {
+  color: var(--muted);
+
+  font-size: 17px;
+
+  margin-top: 8px;
+}
+
+.status {
+  white-space: nowrap;
+
+  border: 1px solid #285237;
+
+  color: var(--success);
+
+  border-radius: 999px;
+
+  padding: 9px 13px;
+
+  font-size: 11px;
+
+  font-weight: 800;
+}
+
+/* =========================================================
+   BUILDER
+   ========================================================= */
+
+.builder-grid {
+  display: grid;
+
+  grid-template-columns:
+    1.3fr .7fr;
+
+  gap: 18px;
+}
+
+.panel {
+  background: rgba(14, 19, 28, .88);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius);
+
+  padding: 25px;
+}
+
+.panel-title {
+  font-weight: 900;
+
+  font-size: 16px;
+
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  margin-bottom: 10px;
+}
+
+textarea {
+  width: 100%;
+
+  min-height: 290px;
+
+  resize: vertical;
+
+  background: #080b11;
+
+  color: var(--text);
+
+  border: 1px solid var(--border-light);
+
+  border-radius: 12px;
+
+  padding: 16px;
+
+  font-family: inherit;
+
+  font-size: 15px;
+
+  line-height: 1.6;
+
+  outline: none;
+}
+
+textarea:focus {
+  border-color: #6878c9;
+}
+
+/* =========================================================
+   CHIPS
+   ========================================================= */
+
+.chips {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 12px;
+}
+
+.chip {
+  background: #171e29;
+
+  border: 1px solid #2b3546;
+
+  color: #b5c0d1;
+
+  border-radius: 9px;
+
+  padding: 9px 12px;
+
+  font-weight: 700;
+}
+
+/* =========================================================
+   ESTIMATE
+   ========================================================= */
+
+.estimate {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 18px;
+
+  padding-top: 15px;
+
+  border-top: 1px solid var(--border);
+
+  color: var(--muted);
+}
+
+.estimate strong {
+  color: var(--text);
+}
+
+/* =========================================================
+   BRAIN
+   ========================================================= */
+
+.brain-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  font-weight: 900;
+}
+
+.brain-dot {
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: var(--success);
+
+  box-shadow: 0 0 14px var(--success);
+}
+
+.brain-log {
+  margin-top: 20px;
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace;
+
+  color: #8997ad;
+
+  font-size: 13px;
+
+  line-height: 2;
+}
+
+.brain-log div {
+  border-bottom: 1px solid #1b222e;
+
+  padding: 5px 0;
+}
+
+/* =========================================================
+   PROJECTS
+   ========================================================= */
+
+.project-list {
+  display: grid;
+
+  gap: 12px;
+}
+
+.project {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 20px;
+
+  padding: 20px;
+
+  border: 1px solid var(--border);
+
+  background: #0e131b;
+
+  border-radius: 14px;
+}
+
+.project h3 {
+  margin-bottom: 6px;
+}
+
+.project-meta {
+  color: var(--muted);
+
+  font-size: 13px;
+}
+
+.project-actions {
+  display: flex;
+
+  gap: 8px;
+}
+
+.empty {
+  text-align: center;
+
+  padding: 55px;
+
+  border: 1px dashed #30394a;
+
+  border-radius: 15px;
+
+  color: var(--muted2);
+}
+
+/* =========================================================
+   PLANS
+   ========================================================= */
+
+.plan-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 16px;
+}
+
+.plan {
+  position: relative;
+}
+
+.plan.featured {
+  border-color: #6877da;
+
+  transform: translateY(-7px);
+}
+
+.plan-label {
+  font-size: 11px;
+
+  letter-spacing: .15em;
+
+  font-weight: 900;
+
+  color: #8795ad;
+}
+
+.plan-price {
+  font-size: 38px;
+
+  margin-top: 15px;
+
+  font-weight: 900;
+}
+
+.plan p {
+  color: var(--muted);
+
+  margin-top: 8px;
+
+  line-height: 1.6;
+}
+
+.plan ul {
+  margin-top: 20px;
+
+  padding-left: 18px;
+
+  color: #9ca7b8;
+
+  line-height: 2;
+}
+
+.demo-note {
+  color: var(--muted2);
+
+  margin-top: 18px;
+
+  font-size: 12px;
+}
+
+/* =========================================================
+   MOBILE NAV
+   ========================================================= */
+
+.mobile-nav {
+  display: none;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width: 800px) {
+
+  .header {
+    height: 64px;
+
+    padding: 0 17px;
+  }
+
+  .header-right .btn-secondary {
+    display: none;
+  }
+
+  .container {
+    width: calc(100% - 34px);
+  }
+
+  .section {
+    padding: 45px 0 95px;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .feature-grid,
+  .builder-grid,
+  .plan-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-header {
+    display: block;
+  }
+
+  .status {
+    display: inline-block;
+
+    margin-top: 16px;
+  }
+
+  .plan.featured {
+    transform: none;
+  }
+
+  .project {
+    display: block;
+  }
+
+  .project-actions {
+    margin-top: 15px;
+  }
+
+  .mobile-nav {
+    display: flex;
+
+    position: fixed;
+
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 200;
+
+    justify-content: space-around;
+
+    padding: 8px;
+
+    background: #090d13;
+
+    border-top: 1px solid var(--border);
+  }
+
+  .mobile-nav button {
+    background: none;
+
+    border: 0;
+
+    color: #aeb9ca;
+
+    padding: 8px;
+
+    font-weight: 800;
+  }
+}
+
+</style>
 </head>
 
 <body>
 
-  <!-- CABEÇALHO -->
+<!-- =======================================================
+     HEADER
+======================================================= -->
 
-  <header>
+<header class="header">
 
-    <div class="logo">
-      BLUEPRINT
+  <div class="logo">
+
+    <span class="logo-symbol">
+      B
+    </span>
+
+    BLUEPRINT
+
+  </div>
+
+  <div class="header-right">
+
+    <span
+      class="credit-badge"
+      id="creditBadge"
+    >
+      25 créditos
+    </span>
+
+    <button
+      class="btn btn-secondary btn-small"
+      onclick="navigate('home')"
+    >
+      Início
+    </button>
+
+    <button
+      class="btn btn-primary btn-small"
+      onclick="navigate('builder')"
+    >
+      Criar projeto
+    </button>
+
+  </div>
+
+</header>
+
+
+<!-- =======================================================
+     HOME
+======================================================= -->
+
+<section
+  id="home"
+  class="section active"
+>
+
+<div class="container">
+
+  <div class="hero">
+
+    <div class="eyebrow">
+      BLUEPRINT BETA · PROJECT BRAIN
     </div>
 
-    <div class="right">
+    <h1>
+      Transforme uma ideia
+      <br>
+      <span>em um produto real.</span>
+    </h1>
 
-      <span id="credits">
-        25 créditos
-      </span>
+    <p>
+      Você não precisa saber o próximo passo.
+      O Blueprint mostra.
+    </p>
 
-      <button onclick="openBuilder()">
-        Criar projeto
+    <div class="hero-buttons">
+
+      <button
+        class="btn btn-primary"
+        onclick="navigate('builder')"
+      >
+        Começar a criar
+      </button>
+
+      <button
+        class="btn btn-secondary"
+        onclick="navigate('projects')"
+      >
+        Ver meus projetos
       </button>
 
     </div>
 
-  </header>
+  </div>
 
 
-  <!-- CONTEÚDO PRINCIPAL -->
+  <div class="feature-grid">
 
-  <main>
+    <article class="card">
 
-    <!-- INÍCIO -->
+      <span class="card-number">
+        01
+      </span>
 
-    <section id="home" class="screen active">
+      <h3>
+        Encontre
+      </h3>
 
-      <div class="hero">
+      <p>
+        Descubra oportunidades,
+        ideias e possibilidades
+        para transformar em produtos.
+      </p>
 
-        <small>
-          BLUEPRINT · PROJECT BRAIN
-        </small>
+    </article>
 
-        <h1>
-          Transforme uma ideia
-          <br>
-          <span>em um produto real.</span>
-        </h1>
 
-        <p>
-          Você não precisa saber o próximo passo.
-          O Blueprint mostra.
-        </p>
+    <article class="card">
 
-        <button onclick="openBuilder()">
-          Começar a criar
+      <span class="card-number">
+        02
+      </span>
+
+      <h3>
+        Crie
+      </h3>
+
+      <p>
+        Descreva sua ideia em linguagem
+        natural e deixe o Blueprint
+        organizar o próximo passo.
+      </p>
+
+    </article>
+
+
+    <article class="card">
+
+      <span class="card-number">
+        03
+      </span>
+
+      <h3>
+        Venda
+      </h3>
+
+      <p>
+        Transforme produtos digitais
+        em oportunidades comerciais
+        e acompanhe tudo em um único lugar.
+      </p>
+
+    </article>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- =======================================================
+     BUILDER
+======================================================= -->
+
+<section
+  id="builder"
+  class="section"
+>
+
+<div class="container">
+
+  <div class="section-header">
+
+    <div>
+
+      <div class="eyebrow">
+        BUILDER
+      </div>
+
+      <h2>
+        O que você quer criar?
+      </h2>
+
+      <p>
+        Escreva como se estivesse conversando
+        com uma pessoa.
+      </p>
+
+    </div>
+
+    <span class="status">
+      ● BRAIN ONLINE · DEMO
+    </span>
+
+  </div>
+
+
+  <div class="builder-grid">
+
+    <!-- INPUT -->
+
+    <div class="panel">
+
+      <label for="idea">
+        Sua ideia
+      </label>
+
+      <textarea
+        id="idea"
+        placeholder="Ex.: Quero criar um sistema para uma clínica onde pacientes possam agendar consultas, a clínica possa gerenciar médicos, horários e pacientes e exista um painel administrativo."
+      ></textarea>
+
+
+      <div class="chips">
+
+        <button
+          class="chip"
+          onclick="setIdea('Quero criar um sistema para uma clínica com agendamento de consultas, médicos, horários, pacientes e painel administrativo.')"
+        >
+          Clínica
+        </button>
+
+        <button
+          class="chip"
+          onclick="setIdea('Quero criar um sistema para uma barbearia com agendamento, clientes, barbeiros, serviços e painel administrativo.')"
+        >
+          Barbearia
+        </button>
+
+        <button
+          class="chip"
+          onclick="setIdea('Quero criar uma plataforma para uma academia com alunos, planos, pagamentos, treinos e painel administrativo.')"
+        >
+          Academia
+        </button>
+
+        <button
+          class="chip"
+          onclick="setIdea('Quero criar um sistema para um restaurante com cardápio, pedidos, clientes, delivery e painel administrativo.')"
+        >
+          Restaurante
         </button>
 
       </div>
 
-    </section>
+
+      <div class="estimate">
+
+        <span>
+          Custo estimado
+        </span>
+
+        <strong>
+          7 créditos
+        </strong>
+
+      </div>
 
 
-    <!-- CRIADOR DE PROJETO -->
+      <button
+        class="btn btn-primary"
+        style="width:100%;margin-top:18px"
+        onclick="createProject()"
+      >
+        Criar com o Blueprint Brain
+      </button>
 
-    <section id="builder" class="screen">
-
-      <div class="wrap">
-
-        <small>
-          BUILDER
-        </small>
-
-        <h2>
-          O que você quer criar?
-        </h2>
-
-        <p>
-          Descreva sua ideia em linguagem natural.
-        </p>
+    </div>
 
 
-        <textarea
-          id="idea"
-          placeholder="Ex.: Quero criar um SaaS para uma clínica com pacientes, médicos, horários, agendamento e painel administrativo."
-        ></textarea>
+    <!-- BRAIN -->
+
+    <div class="panel">
+
+      <div class="brain-header">
+
+        <span class="brain-dot"></span>
+
+        Project Brain
+
+      </div>
 
 
-        <div class="chips">
+      <div
+        id="brainLog"
+        class="brain-log"
+      >
 
-          <button
-            onclick="preset('Quero criar um sistema para uma clínica com pacientes, médicos, horários, agendamento e painel administrativo.')"
-          >
-            Clínica
-          </button>
-
-          <button
-            onclick="preset('Quero criar um sistema para uma barbearia com clientes, barbeiros, serviços, agendamento e painel administrativo.')"
-          >
-            Barbearia
-          </button>
-
-          <button
-            onclick="preset('Quero criar uma plataforma para academia com alunos, planos, pagamentos, treinos e painel administrativo.')"
-          >
-            Academia
-          </button>
-
+        <div>
+          Sistema pronto.
         </div>
 
+        <div>
+          Aguardando uma ideia.
+        </div>
 
-        <p class="cost">
-          Estimativa:
-          <b>7 créditos</b>
-        </p>
-
-
-        <button onclick="createBlueprint()">
-          Criar com o Blueprint Brain
-        </button>
-
-
-        <!-- PROJECT BRAIN -->
-
-        <div class="brain">
-
-          <b>
-            ● PROJECT BRAIN · DEMO
-          </b>
-
-          <pre id="log">Aguardando sua ideia...</pre>
-
+        <div>
+          Modo atual: DEMO.
         </div>
 
       </div>
 
-    </section>
+    </div>
+
+  </div>
+
+</div>
+
+</section>
 
 
-    <!-- PROJETOS -->
+<!-- =======================================================
+     PROJECTS
+======================================================= -->
 
-    <section id="projects" class="screen">
+<section
+  id="projects"
+  class="section"
+>
 
-      <div class="wrap">
+<div class="container">
 
-        <small>
-          WORKSPACE
-        </small>
+  <div class="section-header">
 
-        <h2>
-          Projetos
-        </h2>
+    <div>
 
-        <div id="projectList"></div>
-
+      <div class="eyebrow">
+        WORKSPACE
       </div>
 
-    </section>
+      <h2>
+        Meus projetos
+      </h2>
 
-  </main>
+      <p>
+        Nesta versão, os projetos ficam
+        salvos neste navegador.
+      </p>
 
+    </div>
 
-  <!-- MENU INFERIOR -->
-
-  <nav>
-
-    <button onclick="show('home')">
-      Início
-    </button>
-
-    <button onclick="openBuilder()">
-      Criar
-    </button>
-
-    <button onclick="show('projects')">
-      Projetos
-    </button>
-
-  </nav>
+  </div>
 
 
-  <!-- JAVASCRIPT -->
+  <div
+    id="projectList"
+    class="project-list"
+  ></div>
 
-  <script src="app.js"></script>
+</div>
 
-</body>
+</section>
 
-</html>
+
+<!-- =======================================================
+     PLANS
+======================================================= -->
+
+<section
+  id="plans"
+  class="section"
+>
+
+<div class="container">
+
+  <div class="section-header">
+
+    <div>
+
+      <div class="eyebrow">
+        PLANOS
+      </div>
+
+      <h2>
+        Comece grátis.
+        <br>
+        Escale quando validar.
+      </h2>
+
+    </div>
+
+  </div>
+
+
+  <div class="plan-grid">
+
+
+    <article class="card plan">
+
+      <div class="plan-label">
+        FREE
+      </div>
+
+      <div class="plan-price">
+        R$ 0
+      </div>
+
+      <p>
+        Para experimentar o Blueprint.
+      </p>
+
+      <ul>
+        <li>25 créditos</li>
+        <li>Workspace beta</li>
+        <li>Projetos de teste</li>
+      </ul>
+
+    </article>
+
+
+    <article class="card plan featured">
+
+      <div class="plan-label">
+        START
+      </div>
+
+      <div class="plan-price">
+        R$ 29,90
+      </div>
+
+      <p>
+        Para começar a criar com volume.
+      </p>
+
+      <ul>
+        <li>100 créditos</li>
+        <li>Mais projetos</li>
+        <li>Mais automações</li>
+      </ul>
+
+    </article>
+
+
+    <article class="card plan">
+
+      <div class="plan-label">
+        PRO
+      </div>
+
+      <div class="plan-price">
+        R$ 59,90
+      </div>
+
+     
